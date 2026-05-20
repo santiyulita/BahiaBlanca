@@ -12,10 +12,10 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Floor
+  - Walls
+  - Objects
   - 
   - 
   - 
@@ -50,6 +50,12 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 1006125761
+    locked: 0
+  - name: Objects Top
+    uniqueID: 1546657327
     locked: 0
   m_RenderingLayers:
   - Default

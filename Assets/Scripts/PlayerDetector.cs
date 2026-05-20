@@ -10,17 +10,10 @@ public class PlayerDetector : MonoBehaviour
             Debug.Log("Estoy cerca de un item");
 
             currentItem = other.GetComponent<Interactable>();
-        }
-    }
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Item"))
-        {
-            Debug.Log("Me alejé del item");
 
-            currentItem = null;
+            Debug.Log("Item guardado: " + currentItem);
         }
     }
 }
 
-        
+
