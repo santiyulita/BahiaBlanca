@@ -8,6 +8,8 @@ public class Door : MonoBehaviour
     [SerializeField] private Sprite closedSprite;
     [SerializeField] private Sprite openSprite;
     [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private CanvasManager _canvasManager;
+    [SerializeField] private PlayerController _player;
 
     private SpriteRenderer _spriteRenderer;
     private bool _isOpen = false;
@@ -22,19 +24,40 @@ public class Door : MonoBehaviour
     {
         if (_isOpen) return;
 
-        if (inventory.Contains(requiredItem))
+        if (!inventory.Contains(requiredItem))
         {
-            Debug.Log("Puerta abierta");
+            _canvasManager.typingSpeed = 0.03f;
 
-            _spriteRenderer.sprite = openSprite;
-            GetComponent<Collider2D>().enabled = false;
-            _audioSource.Play();
-
-            _isOpen = true;
-        }
-        else
+            _canvasManager.ShowDialogue(new List<string>
         {
-            Debug.Log("Necesitás una llave");
+            "Está cerrada...",
+            "Necesito una llave."
+        });
+
+            _player.DisableMovement();
+            return;
         }
+
+        if (_player.IsSick)
+        {
+            _canvasManager.typingSpeed = 0.03f;
+
+            _canvasManager.ShowDialogue(new List<string>
+        {
+            "No me siento bien...",
+            "Quizás haya algo aquí para sanarme."
+        });
+
+            _player.DisableMovement();
+            return;
+        }
+
+        Debug.Log("Puerta abierta");
+
+        _spriteRenderer.sprite = openSprite;
+        GetComponent<Collider2D>().enabled = false;
+        _audioSource.Play();
+
+        _isOpen = true;
     }
 }

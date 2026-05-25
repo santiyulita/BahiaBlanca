@@ -4,9 +4,8 @@ public class Interactable : MonoBehaviour
 {
     public string itemName;
 
-    public void Interact()
+    public virtual void Interact()
     {
         Debug.Log("Agarraste: " + itemName);
-        Destroy(gameObject);
     }
 }
