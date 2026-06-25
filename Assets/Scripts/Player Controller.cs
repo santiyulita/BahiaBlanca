@@ -19,12 +19,20 @@ public class PlayerController : MonoBehaviour
         if (_canvasManager.IsDialogueActive) return;
         if (_canvasManager.JustClosedDialogue) return;
         if (_detector.currentItem == null) return;
+        var current = _detector.currentItem;
 
         Door door = _detector.currentItem.GetComponent<Door>();
 
         if (door != null)
         {
             door.TryOpen(_inventory);
+            return;
+        }
+
+        DoorInteract doorInteract = current.GetComponent<DoorInteract>();
+        if (doorInteract != null)
+        {
+            doorInteract.Interact();
             return;
         }
 
@@ -56,6 +64,7 @@ public class PlayerController : MonoBehaviour
         }
 
         interactable.Interact();
+        current.Interact();
     }
         void Awake()
         {

@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Rendering.LookDev;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class CanvasManager : MonoBehaviour
 {
@@ -132,7 +130,10 @@ public class CanvasManager : MonoBehaviour
 
     public void HideInteract()
     {
-        interactText.SetActive(false);
+        if (interactText != null)
+        {
+            interactText.SetActive(false);
+        }
     }
     public IEnumerator FadeFromBlack(float duration)
     {
